@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE course-details SYSTEM "coursedetails.dtd">
+<course-details>
+<course cid="c1">
+<name>Java</name>
+<duration dtype="weeks">10</duration>
+<marks>50</marks>
+</course>
+<course cid="c2">
+<name>Java</name>
+<duration>10</duration>
+<marks>50</marks>
+</course>
+</course-details>

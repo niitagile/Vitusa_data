@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT course-details (course)+>
+<!ELEMENT course (name,duration,marks*)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT duration (#PCDATA)>
+<!ELEMENT marks (#PCDATA)>
+<!ATTLIST course cid ID #REQUIRED>
+<!ATTLIST duration dtype CDATA "day"> 
