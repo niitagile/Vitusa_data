@@ -1,0 +1,102 @@
+procedure-- a block of statements which is having a name. It takes arguments-- in/out/inout
+
+create procedure prcedurename(argumentlist)
+begin
+	statements;
+
+end
+
+
+delimiter $$
+create procedure getEmployees()
+begin
+	select employee_id, employee_name,salary from 	employees order by salary desc;
+end$$
+delimiter ;
+
+
+//to invoke procedure
+
+call getEmployees();
+
+******************************************************
+
+// how to declare variables
+
+declare variable_name datatype(size) [default default_value]
+
+declare totalsalary decimal(8,2) default 0.0;
+
+declare num1,num2 int default 0;
+
+
+//assign value
+set num1=78;
+
+
+example
+
+delimiter $$
+create procedure getTotalSalary()
+begin
+ declare totalsalary decimal(8,2) default 0.0;
+	select count(*) into totalsalary from employees;
+	select totalsalary;-- to print value	
+end$$
+delimiter ;
+
+call getTotalSalary();
+
+
+*************************************
+want to check name of all procedure in your database
+
+show procedure status where db='hr';
+
+***********************************************
+		//types of parameters
+in -- read only  (default)
+out -- write only
+inout - read/write
+
+delimiter $$
+create procedure getEmployee(in empid integer)
+begin
+	emp_id=89;--error
+	select * from employees where employee_id=empid;
+end$$
+delimiter ;
+
+call getEmployee(104);
+
+*****************
+exmaple in and out
+
+delimiter $$
+create procedure getDepartmentInfo(in dept_id integer, out depart_name varchar(20))
+begin
+	select department_name into depart_name from departments where department_id=dept_id;
+End$$
+delimiter ;
+
+
+call getDepartmentInfo(20,@depart_name);
+
+select depart_name;
+
+
+*********************************************
+example of inout
+delimiter $$
+create procedure cube(inout num int)
+begin
+	set num= num *num*num;
+
+end$$
+delimiter ;
+
+set @num=5;
+call cube(@num);
+select @num;
+*********************************************
+
