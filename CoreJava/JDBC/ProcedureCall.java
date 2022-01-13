@@ -16,13 +16,24 @@ public static void main(String[] args) {
 
     Connection con=DriverManager.getConnection(  "jdbc:oracle:thin:@localhost:1521:orcl","hr","hr");  
   
-    CallableStatement stmt=con.prepareCall("{call fetch_rec(?,?)}"); 
+    CallableStatement stmt=con.prepareCall("{call Add_dept(?,?)}");
+    
+    
     stmt.setInt(1,id);
     stmt.registerOutParameter(2, Types.VARCHAR);
     stmt.execute();
     System.out.println("Name="+stmt.getString(2));  
 		System.out.println("success");
-
+/* //to call function
+    //CallableStatement stmt=con.prepareCall("{?=call Add_Dept(?)}");
+    
+    stmt.setInt(2,id);
+    stmt.registerOutParameter(1, Types.VARCHAR);
+    stmt.execute();
+    System.out.println("Name="+stmt.getString(1));  
+		System.out.println("success");
+ * 
+ */
 } catch(Exception e){
 	System.out.println(e);
 }
@@ -45,3 +56,18 @@ public static void main(String[] args) {
   4    begin
   5   select department_name into p_dname from departments where department_id=p_deptno;
   6*  end;*/
+
+//call ADD_DEPT()
+
+
+
+/*
+1  create or replace function ADD_DEPT_fn(p_deptno number)
+2  return varchar2
+3  IS
+4  p_dname  varchar2(20);
+5  begin
+6     select department_name into p_dname from departments where department_id=p_deptno;
+7  return p_dname;
+8*     end;
+*/
